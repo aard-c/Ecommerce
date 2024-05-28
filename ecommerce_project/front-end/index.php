@@ -1,12 +1,4 @@
 <?php
-
-
-//--to display PHP errors--
-ini_set('display_errors', '1'); // 1 is on, 0 is off
-ini_set('display_startup_errors', '1'); // 1 is on, 0 is off
-error_reporting(E_ALL);
-
-// Include the config.php file
 include('../config.php');
 
 // Fetch categories and products using the query function

@@ -1,10 +1,9 @@
 <?php
-// cart.php
 session_start();
-include('config.php');
+include('../config.php');
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['add_to_cart'])) {
-    $product_id = $_POST['product_id'];
+    $product_id = intval($_POST['product_id']);
     $quantity = 1;
 
     if (isset($_SESSION['cart'][$product_id])) {

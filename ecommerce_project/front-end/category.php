@@ -1,9 +1,16 @@
 <?php
-// category.php
-include('config.php');
+include('../config.php');
 
-$category_id = $_GET['id'];
+$category_id = isset($_GET['id']) ? intval($_GET['id']) : 0;
+if ($category_id <= 0) {
+    die('Invalid category ID');
+}
+
 $category = mysqli_fetch_assoc(mysqli_query($conn, "SELECT * FROM categories WHERE id = $category_id"));
+if (!$category) {
+    die('Category not found');
+}
+
 $products = mysqli_query($conn, "SELECT * FROM products WHERE id IN (SELECT product_id FROM product_categories WHERE category_id = $category_id)");
 ?>
 

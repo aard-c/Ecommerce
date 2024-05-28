@@ -1,9 +1,15 @@
 <?php
-// product.php
-include('config.php');
+include('../config.php');
 
-$product_id = $_GET['id'];
+$product_id = isset($_GET['id']) ? intval($_GET['id']) : 0;
+if ($product_id <= 0) {
+    die('Invalid product ID');
+}
+
 $product = mysqli_fetch_assoc(mysqli_query($conn, "SELECT * FROM products WHERE id = $product_id"));
+if (!$product) {
+    die('Product not found');
+}
 ?>
 
 <h1><?php echo $product['name']; ?></h1>

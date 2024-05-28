@@ -1,31 +1,32 @@
 <?php
-// checkout.php
 session_start();
-include('config.php');
+include('../config.php');
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['checkout'])) {
-    $customer_name = $_POST['customer_name'];
-    $customer_phone = $_POST['customer_phone'];
-    $shipping_address = $_POST['shipping_address'];
-    $billing_info = $_POST['billing_info'];
+    $customer_name = mysqli_real_escape_string($conn, $_POST['customer_name']);
+    $customer_phone = mysqli_real_escape_string($conn, $_POST['customer_phone']);
+    $shipping_address = mysqli_real_escape_string($conn, $_POST['shipping_address']);
+    $billing_info = mysqli_real_escape_string($conn, $_POST['billing_info']);
 
     $order_number = uniqid();
 
     $query = "INSERT INTO orders (order_number, customer_name, customer_phone, shipping_address, billing_info) VALUES ('$order_number', '$customer_name', '$customer_phone', '$shipping_address', '$billing_info')";
-    mysqli_query($conn, $query);
+    if (mysqli_query($conn, $query)) {
+        $order_id = mysqli_insert_id($conn);
 
-    $order_id = mysqli_insert_id($conn);
+        foreach ($_SESSION['cart'] as $product_id => $quantity) {
+            $query = "INSERT INTO order_items (order_id, product_id, quantity) VALUES ($order_id, $product_id, $quantity)";
+            mysqli_query($conn, $query);
+        }
 
-    foreach ($_SESSION['cart'] as $product_id => $quantity) {
-        $query = "INSERT INTO order_items (order_id, product_id, quantity) VALUES ($order_id, $product_id, $quantity)";
-        mysqli_query($conn, $query);
+        // Clear the cart
+        $_SESSION['cart'] = [];
+
+        header('Location: success.php');
+        exit;
+    } else {
+        echo "Error: " . mysqli_error($conn);
     }
-
-    // Clear the cart
-    $_SESSION['cart'] = [];
-
-    header('Location: success.php');
-    exit;
 }
 ?>
 
