@@ -1,5 +1,5 @@
 <?php
-include("config.php");
+include('../config.php');
 
 include("logged_in_check.php");
 
@@ -31,7 +31,7 @@ include("logged_in_check.php");
 
                 <div class="col-md-12 col-xs-12">
 
-                    <h1>Welcome to Dashboad, <?php echo $_SESSION['admin_username']; ?></h1>
+                    <h1>Welcome to Dashboard, <?php echo $_SESSION['admin_username']; ?> !</h1>
 
                 </div> <!-- /.col -->
 

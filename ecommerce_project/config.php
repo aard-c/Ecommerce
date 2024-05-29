@@ -21,7 +21,7 @@ if ($conn->connect_error) {
 }
 
 // Query function
-function berkhoca_query_parser($sql = '') {
+function query_parser($sql = '') {
     global $conn; // Use the global $conn variable
 
     if (empty($sql)) {
