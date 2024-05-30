@@ -1,16 +1,14 @@
 <?php
-session_start();
 include('../config.php');
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['checkout'])) {
     $customer_name = mysqli_real_escape_string($conn, $_POST['customer_name']);
     $customer_phone = mysqli_real_escape_string($conn, $_POST['customer_phone']);
     $shipping_address = mysqli_real_escape_string($conn, $_POST['shipping_address']);
-    $billing_info = mysqli_real_escape_string($conn, $_POST['billing_info']);
 
     $order_number = uniqid();
 
-    $query = "INSERT INTO orders (order_number, customer_name, customer_phone, shipping_address, billing_info) VALUES ('$order_number', '$customer_name', '$customer_phone', '$shipping_address', '$billing_info')";
+    $query = "INSERT INTO orders (order_number, customer_name, customer_phone, shipping_address) VALUES ('$order_number', '$customer_name', '$customer_phone', '$shipping_address')";
     if (mysqli_query($conn, $query)) {
         $order_id = mysqli_insert_id($conn);
 
@@ -19,10 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['checkout'])) {
             mysqli_query($conn, $query);
         }
 
-        // Clear the cart
-        $_SESSION['cart'] = [];
-
-        header('Location: success.php');
+        header('Location: payment.php?order_id='.$order_id);
         exit;
     } else {
         echo "Error: " . mysqli_error($conn);
@@ -35,6 +30,5 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['checkout'])) {
     Name: <input type="text" name="customer_name" required><br>
     Phone: <input type="text" name="customer_phone" required><br>
     Shipping Address: <textarea name="shipping_address" required></textarea><br>
-    Billing Info: <textarea name="billing_info" required></textarea><br>
-    <button type="submit" name="checkout">Place Order</button>
+    <button type="submit" name="checkout">Proceed to Payment</button>
 </form>
