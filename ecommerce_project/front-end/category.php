@@ -1,5 +1,6 @@
 <?php
 include('../config.php');
+include('header.php');
 
 $category_id = isset($_GET['id']) ? intval($_GET['id']) : 0;
 if ($category_id <= 0) {

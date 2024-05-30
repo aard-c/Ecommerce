@@ -19,20 +19,59 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 }
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Edit Category</title>
-</head>
+<?php include('header.php'); ?>
+
 <body>
-    <h1>Edit Category</h1>
-    <form action="edit_category.php?id=<?php echo $category['id']; ?>" method="POST">
-        <label for="name">Name:</label>
-        <input type="text" name="name" value="<?php echo $category['name']; ?>" required><br>
-        <label for="display_order">Display Order:</label>
-        <input type="number" name="display_order" value="<?php echo $category['display_order']; ?>" required><br>
-        <button type="submit">Update Category</button>
-    </form>
+
+<div id="wrapper">
+
+    <?php include('top_bar.php'); ?>
+
+    <?php include('left_sidebar.php'); ?>
+
+    <div id="content">      
+        
+        <div id="content-header">
+            <h1>Edit Category</h1>
+        </div> <!-- #content-header --> 
+
+        <div id="content-container">
+
+            <div class="row">
+
+                <div class="col-md-12 col-xs-12">
+
+                    <form action="edit_category.php?id=<?php echo $category['id']; ?>" method="POST" class="form-horizontal">
+                        <div class="form-group">
+                            <label for="name" class="col-sm-2 control-label">Name:</label>
+                            <div class="col-sm-10">
+                                <input type="text" name="name" class="form-control" value="<?php echo $category['name']; ?>" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="display_order" class="col-sm-2 control-label">Display Order:</label>
+                            <div class="col-sm-10">
+                                <input type="number" name="display_order" class="form-control" value="<?php echo $category['display_order']; ?>" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-offset-2 col-sm-10">
+                                <button type="submit" class="btn btn-primary">Update Category</button>
+                            </div>
+                        </div>
+                    </form>
+
+                </div> <!-- /.col -->
+
+            </div> <!-- /.row -->
+
+        </div> <!-- /#content-container -->
+        
+    </div> <!-- #content -->    
+    
+</div> <!-- #wrapper -->
+
+<?php include('footer.php'); ?>
+
 </body>
 </html>

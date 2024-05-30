@@ -1,6 +1,6 @@
 <?php
 include('../config.php');
-
+include('header.php');
 // Fetch categories and products using the query function
 $categories = query_parser("SELECT * FROM categories ORDER BY display_order");
 $products = query_parser("SELECT * FROM products LIMIT 10");

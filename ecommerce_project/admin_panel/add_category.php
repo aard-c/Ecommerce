@@ -15,20 +15,59 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 }
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Add Category</title>
-</head>
+<?php include('header.php'); ?>
+
 <body>
-    <h1>Add Category</h1>
-    <form action="add_category.php" method="POST">
-        <label for="name">Name:</label>
-        <input type="text" name="name" required><br>
-        <label for="display_order">Display Order:</label>
-        <input type="number" name="display_order" required><br>
-        <button type="submit">Add Category</button>
-    </form>
+
+<div id="wrapper">
+
+    <?php include('top_bar.php'); ?>
+
+    <?php include('left_sidebar.php'); ?>
+
+    <div id="content">      
+        
+        <div id="content-header">
+            <h1>Add Category</h1>
+        </div> <!-- #content-header --> 
+
+        <div id="content-container">
+
+            <div class="row">
+
+                <div class="col-md-12 col-xs-12">
+
+                    <form action="add_category.php" method="POST" class="form-horizontal">
+                        <div class="form-group">
+                            <label for="name" class="col-sm-2 control-label">Name:</label>
+                            <div class="col-sm-10">
+                                <input type="text" name="name" class="form-control" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="display_order" class="col-sm-2 control-label">Display Order:</label>
+                            <div class="col-sm-10">
+                                <input type="number" name="display_order" class="form-control" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-offset-2 col-sm-10">
+                                <button type="submit" class="btn btn-primary">Add Category</button>
+                            </div>
+                        </div>
+                    </form>
+
+                </div> <!-- /.col -->
+
+            </div> <!-- /.row -->
+
+        </div> <!-- /#content-container -->
+        
+    </div> <!-- #content -->    
+    
+</div> <!-- #wrapper -->
+
+<?php include('footer.php'); ?>
+
 </body>
 </html>

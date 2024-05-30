@@ -1,5 +1,6 @@
 <?php
 include('../config.php');
+include('header.php');
 
 $product_id = isset($_GET['id']) ? intval($_GET['id']) : 0;
 if ($product_id <= 0) {
@@ -17,7 +18,14 @@ if (!$product) {
 <p><?php echo $product['description']; ?></p>
 <p>Price: $<?php echo $product['price']; ?></p>
 <p>Stock: <?php echo $product['stock_quantity']; ?></p>
-<form method="POST" action="cart.php">
+<form id="add-to-cart-form" method="POST" action="cart.php">
     <input type="hidden" name="product_id" value="<?php echo $product['id']; ?>">
-    <button type="submit" name="add_to_cart">Add to Cart</button>
+    <button type="submit" name="add_to_cart" onclick="addToCart()">Add to Cart</button>
 </form>
+
+<script>
+    function addToCart() {
+        alert("<?php echo $product['name']; ?> added to cart!");
+        document.getElementById("add-to-cart-form").submit();
+    }
+</script>

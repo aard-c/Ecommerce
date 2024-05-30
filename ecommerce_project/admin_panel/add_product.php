@@ -26,32 +26,87 @@ $categories = mysqli_query($conn, "SELECT * FROM categories");
 
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Add Product</title>
-</head>
+<?php include('header.php'); ?>
+
 <body>
-    <h1>Add Product</h1>
-    <form action="add_product.php" method="POST">
-        <label for="name">Name:</label>
-        <input type="text" name="name" required><br>
-        <label for="picture">Picture URL:</label>
-        <input type="text" name="picture" required><br>
-        <label for="price">Price:</label>
-        <input type="number" step="0.01" name="price" required><br>
-        <label for="stock_quantity">Stock Quantity:</label>
-        <input type="number" name="stock_quantity" required><br>
-        <label for="description">Description:</label>
-        <textarea name="description" required></textarea><br>
-        <label for="categories">Categories:</label>
-        <select name="categories[]" multiple required>
-            <?php while ($row = mysqli_fetch_assoc($categories)) { ?>
-            <option value="<?php echo $row['id']; ?>"><?php echo $row['name']; ?></option>
-            <?php } ?>
-        </select><br>
-        <button type="submit">Add Product</button>
-    </form>
+
+<div id="wrapper">
+
+    <?php include('top_bar.php'); ?>
+
+    <?php include('left_sidebar.php'); ?>
+
+    <div id="content">      
+        
+        <div id="content-header">
+            <h1>Add Product</h1>
+        </div> <!-- #content-header --> 
+
+        <div id="content-container">
+
+            <div class="row">
+
+                <div class="col-md-12 col-xs-12">
+
+                    <form action="add_product.php" method="POST" class="form-horizontal">
+                        <div class="form-group">
+                            <label for="name" class="col-sm-2 control-label">Name:</label>
+                            <div class="col-sm-10">
+                                <input type="text" name="name" class="form-control" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="picture" class="col-sm-2 control-label">Picture URL:</label>
+                            <div class="col-sm-10">
+                                <input type="text" name="picture" class="form-control" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="price" class="col-sm-2 control-label">Price:</label>
+                            <div class="col-sm-10">
+                                <input type="number" step="0.01" name="price" class="form-control" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="stock_quantity" class="col-sm-2 control-label">Stock Quantity:</label>
+                            <div class="col-sm-10">
+                                <input type="number" name="stock_quantity" class="form-control" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="description" class="col-sm-2 control-label">Description:</label>
+                            <div class="col-sm-10">
+                                <textarea name="description" class="form-control" required></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="categories" class="col-sm-2 control-label">Categories:</label>
+                            <div class="col-sm-10">
+                                <select name="categories[]" class="form-control" multiple required>
+                                    <?php while ($row = mysqli_fetch_assoc($categories)) { ?>
+                                    <option value="<?php echo $row['id']; ?>"><?php echo $row['name']; ?></option>
+                                    <?php } ?>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-offset-2 col-sm-10">
+                                <button type="submit" class="btn btn-primary">Add Product</button>
+                            </div>
+                        </div>
+                    </form>
+
+                </div> <!-- /.col -->
+
+            </div> <!-- /.row -->
+
+        </div> <!-- /#content-container -->
+        
+    </div> <!-- #content -->    
+    
+</div> <!-- #wrapper -->
+
+<?php include('footer.php'); ?>
+
 </body>
 </html>
