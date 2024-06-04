@@ -49,7 +49,7 @@ $products = mysqli_query($conn, "SELECT p.*, GROUP_CONCAT(c.name) AS categories
                             <tr>
                                 <td><?php echo $row['id']; ?></td>
                                 <td><?php echo $row['name']; ?></td>
-                                <td><img src="<?php echo $row['picture']; ?>" width="50" height="50"></td>
+                                <td><img src="../front-end/product-images/<?php echo $row['picture']; ?>" width="50" height="50"></td>
                                 <td><?php echo $row['price']; ?></td>
                                 <td><?php echo $row['stock_quantity']; ?></td>
                                 <td><?php echo $row['description']; ?></td>

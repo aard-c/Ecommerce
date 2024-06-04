@@ -39,6 +39,16 @@ if (!$categories || !$products) {
             width: 100%;
             height: auto;
         }
+        .slider img {
+            width: 250px;  
+            height: 250px; 
+            object-fit: cover;
+            margin-bottom: 10px;
+        }
+        .slider p {
+            text-align: left;
+            margin: 0;
+        }
     </style>
 </head>
 <body>
@@ -55,7 +65,7 @@ if (!$categories || !$products) {
     <?php foreach ($products as $product) { ?>
         <div>
             <a href="product.php?id=<?php echo $product['id']; ?>">
-                <img src="<?php echo $product['picture']; ?>" alt="<?php echo $product['name']; ?>">
+                <img src="product-images/<?php echo $product['picture']; ?>" alt="<?php echo $product['name']; ?>">
                 <p><?php echo $product['name']; ?></p>
                 <p>$<?php echo $product['price']; ?></p>
             </a>

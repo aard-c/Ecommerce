@@ -59,7 +59,7 @@ $orders = mysqli_query($conn, "SELECT * FROM orders");
                                 <td><?php echo $row['customer_phone']; ?></td>
                                 <td><?php echo implode(", ", $products); ?></td>
                                 <td><?php echo implode(", ", $quantities); ?></td>
-                                <td><?php echo implode(", ", array_map(function($image) { return "<img src='$image' width='50' height='50'>"; }, $images)); ?></td>
+                                <td><?php echo implode(", ", array_map(function($image) { return "<img src='../front-end/product-images/$image' width='50' height='50'>"; }, $images)); ?></td>
                                 <td><?php echo $row['billing_info']; ?></td>
                                 <td><?php echo $row['shipping_address']; ?></td>
                             </tr>

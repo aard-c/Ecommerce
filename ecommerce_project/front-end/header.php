@@ -3,21 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Online Store</title>
-    <!-- Link to your CSS file -->
-    <link rel="stylesheet" href="styles.css">
+    <title>Online Store</title>
+    <style>
+        /* Style for headers */
+        .welcome-text {
+            text-align: center;
+            font-family: Arial, sans-serif;
+            color: #333;
+        }
+
+        /* Style for buttons */
+        .button-container {
+            text-align: right;
+            margin-top: 10px;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            margin-left: 10px;
+        }
+
+        
+    </style>
 </head>
 <body>
-    <header>
-        <div class="container">
-            <h1>My Online Store</h1>
-            <nav>
-                <ul>
-                    <li><a href="index.php">Home</a></li>
-                    <li><a href="cart.php">Cart</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
+    <h1 class="welcome-text">Welcome to My Online Store</h1>
+    <!-- Buttons Container -->
+    <div class="button-container">
+        <a href="index.php" class="button">Home</a>
+        <a href="cart.php" class="button">Cart</a>
+    </div>
+
+    
+
 </body>
 </html>
