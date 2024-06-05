@@ -10,7 +10,7 @@ include("config.php");
 <!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
     <head>
 
-    <title>Berk Hoca Default Admin Login</title>
+    <title>Default Admin Login</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="">

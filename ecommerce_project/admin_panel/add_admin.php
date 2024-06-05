@@ -1,6 +1,32 @@
 <?php
 include('../config.php');
 include("logged_in_check.php");
+
+// Check if form is submitted
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Retrieve form data
+    $admin_username = $_POST['admin_username'];
+    $admin_password = $_POST['admin_password']; 
+    $admin_name = $_POST['admin_name'];
+    $admin_surname = $_POST['admin_surname'];
+    $admin_status = $_POST['admin_status'];
+
+   
+
+    // Prepare SQL statement to insert data into admin_table
+    $sql = "INSERT INTO admin_table (admin_username, admin_pass, admin_name, admin_surname, admin_status)
+            VALUES ('$admin_username', '$admin_password', '$admin_name', '$admin_surname', $admin_status)";
+
+    // Execute SQL query
+    if ($conn->query($sql) === TRUE) {
+        echo "<script>alert('New admin added successfully');</script>";
+        echo "<script>window.location.href = 'admin_list.php';</script>";
+        exit(); // stop further execution to prevent the form from being displayed again
+    } else {
+        echo "Error: " . $sql . "<br>" . $conn->error;
+    }
+
+}
 ?>
 
 <?php include('header.php'); ?>
@@ -25,7 +51,7 @@ include("logged_in_check.php");
 
                 <div class="col-md-12 col-xs-12">
 
-                    <form action="add_admin_action.php" method="POST">
+                    <form action="" method="POST">
                         <div class="form-group">
                             <label for="admin_username">Username:</label>
                             <input type="text" class="form-control" id="admin_username" name="admin_username" required>
@@ -41,6 +67,10 @@ include("logged_in_check.php");
                         <div class="form-group">
                             <label for="admin_surname">Surname:</label>
                             <input type="text" class="form-control" id="admin_surname" name="admin_surname" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="admin_status">Status:</label>
+                            <input type="number" class="form-control" id="admin_status" name="admin_status" required>
                         </div>
                         <button type="submit" class="btn btn-primary">Add Admin</button>
                     </form>

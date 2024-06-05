@@ -59,7 +59,6 @@ if (!$categories || !$products) {
         .slider p {
             text-align: left;
             margin: 0;
-            font-family: Arial, sans-serif;
         }
         .slider p.product-name {
             font-size: 18px;
@@ -72,7 +71,6 @@ if (!$categories || !$products) {
 
         /* General styles */
         body {
-            font-family: Arial, sans-serif;
             background-color: #f8f9fa;
             color: #333;
             margin: 0;
