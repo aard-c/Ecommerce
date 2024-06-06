@@ -41,7 +41,7 @@ CREATE TABLE `admin_table` (
 --
 
 INSERT INTO `admin_table` (`admin_id`, `admin_name`, `admin_surname`, `admin_username`, `admin_pass`, `admin_status`) VALUES
-(1, 'Berk', 'Kanburlar', 'berkhoca', '121212', 1);
+(1, 'Arda', 'Çildan', 'ardacil', '1234', 1);
 
 --
 -- Dökümü yapılmış tablolar için indeksler

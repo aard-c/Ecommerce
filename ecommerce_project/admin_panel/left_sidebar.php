@@ -1,6 +1,4 @@
 <div id="sidebar-wrapper" class="collapse sidebar-collapse">
-    
-
 
     <nav id="sidebar">      
         
@@ -86,6 +84,13 @@
                 <a href="order_list.php">
                     <i class="fa fa-angle-double-right"></i>
                     ORDER MANAGEMENT
+                </a>
+            </li>
+
+            <li>
+                <a href="logout.php">
+                    <i class="fa fa-angle-double-right"></i>
+                    LOGOUT
                 </a>
             </li>
 
