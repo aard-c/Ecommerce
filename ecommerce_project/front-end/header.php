@@ -34,7 +34,7 @@
     </style>
 </head>
 <body>
-    <h1 class="welcome-text">Welcome to My Online Store</h1>
+    <h1 class="welcome-text">Welcome to CildanList</h1>
     <!-- Buttons Container -->
     <div class="button-container">
         <a href="index.php" class="button">Home</a>

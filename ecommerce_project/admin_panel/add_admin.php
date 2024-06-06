@@ -9,13 +9,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $admin_password = $_POST['admin_password']; 
     $admin_name = $_POST['admin_name'];
     $admin_surname = $_POST['admin_surname'];
-    $admin_status = $_POST['admin_status'];
+    /* $admin_status = $_POST['admin_status']; */
 
    
 
     // Prepare SQL statement to insert data into admin_table
-    $sql = "INSERT INTO admin_table (admin_username, admin_pass, admin_name, admin_surname, admin_status)
-            VALUES ('$admin_username', '$admin_password', '$admin_name', '$admin_surname', $admin_status)";
+    $sql = "INSERT INTO admin_table (admin_username, admin_pass, admin_name, admin_surname)
+            VALUES ('$admin_username', '$admin_password', '$admin_name', '$admin_surname')";
 
     // Execute SQL query
     if ($conn->query($sql) === TRUE) {
@@ -68,10 +68,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             <label for="admin_surname">Surname:</label>
                             <input type="text" class="form-control" id="admin_surname" name="admin_surname" required>
                         </div>
-                        <div class="form-group">
+                        <!-- <div class="form-group">
                             <label for="admin_status">Status:</label>
                             <input type="number" class="form-control" id="admin_status" name="admin_status" required>
-                        </div>
+                        </div> -->
                         <button type="submit" class="btn btn-primary">Add Admin</button>
                     </form>
 
