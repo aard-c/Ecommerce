@@ -49,6 +49,10 @@ if (!$product) {
         .product-container form button:hover {
             background-color: #0056b3;
         }
+        .product-container .out-of-stock {
+            color: red;
+            font-weight: bold;
+        }
     </style>
 </head>
 <body>
@@ -58,10 +62,14 @@ if (!$product) {
         <p><?php echo $product['description']; ?></p>
         <p>Price: $<?php echo $product['price']; ?></p>
         <p>Stock: <?php echo $product['stock_quantity']; ?></p>
-        <form id="add-to-cart-form" method="POST" action="cart.php">
-            <input type="hidden" name="product_id" value="<?php echo $product['id']; ?>">
-            <button type="submit" name="add_to_cart" onclick="addToCart()">Add to Cart</button>
-        </form>
+        <?php if ($product['stock_quantity'] > 0) { ?>
+            <form id="add-to-cart-form" method="POST" action="cart.php">
+                <input type="hidden" name="product_id" value="<?php echo $product['id']; ?>">
+                <button type="submit" name="add_to_cart" onclick="addToCart()">Add to Cart</button>
+            </form>
+        <?php } else { ?>
+            <p class="out-of-stock">Out of Stock</p>
+        <?php } ?>
     </div>
 
     <script>

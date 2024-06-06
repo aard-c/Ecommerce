@@ -2,7 +2,6 @@
 include('../config.php');
 include('header.php');
 
-
 // Function to update the quantity of a product in the cart
 function updateQuantity($productId, $quantity) {
     if ($quantity <= 0) {
@@ -17,10 +16,25 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['add_to_cart'])) {
     $product_id = intval($_POST['product_id']);
     $quantity = 1;
 
-    if (isset($_SESSION['cart'][$product_id])) {
-        $_SESSION['cart'][$product_id] += $quantity;
-    } else {
+    // Fetch current stock quantity
+    $product = mysqli_fetch_assoc(mysqli_query($conn, "SELECT stock_quantity FROM products WHERE id = $product_id"));
+
+    if ($product && isset($_SESSION['cart'][$product_id])) {
+        // Calculate total quantity in cart including current session's quantity
+        $totalQuantityInCart = $_SESSION['cart'][$product_id] + $quantity;
+
+        // Check if total quantity in cart exceeds available stock
+        if ($totalQuantityInCart <= $product['stock_quantity']) {
+            $_SESSION['cart'][$product_id] += $quantity;
+        } else {
+            // Handle case where adding more exceeds stock (optional)
+            echo "<script>alert('Cannot add more. Available stock: " . $product['stock_quantity'] . "');</script>";
+        }
+    } elseif ($product && !isset($_SESSION['cart'][$product_id]) && $quantity <= $product['stock_quantity']) {
         $_SESSION['cart'][$product_id] = $quantity;
+    } elseif ($product && $quantity > $product['stock_quantity']) {
+        // Handle case where initial quantity exceeds stock (optional)
+        echo "<script>alert('Cannot add more. Available stock: " . $product['stock_quantity'] . "');</script>";
     }
 }
 
@@ -28,7 +42,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['add_to_cart'])) {
 if (isset($_POST['increase_quantity'])) {
     $product_id = intval($_POST['product_id']);
     if (isset($_SESSION['cart'][$product_id])) {
-        $_SESSION['cart'][$product_id]++;
+        // Fetch current stock quantity
+        $product = mysqli_fetch_assoc(mysqli_query($conn, "SELECT stock_quantity FROM products WHERE id = $product_id"));
+
+        // Check if increasing quantity exceeds available stock
+        if ($_SESSION['cart'][$product_id] < $product['stock_quantity']) {
+            $_SESSION['cart'][$product_id]++;
+        } else {
+            // Handle case where increasing exceeds stock (optional)
+            echo "<script>alert('Cannot add more. Available stock: " . $product['stock_quantity'] . "');</script>";
+        }
     }
 }
 

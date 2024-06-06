@@ -1,7 +1,6 @@
 <?php
 include('../config.php');
 
-
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['place_order'])) {
     $order_id = intval($_POST['order_id']);
     $card_number = mysqli_real_escape_string($conn, $_POST['card_number']);
@@ -10,8 +9,33 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['place_order'])) {
 
     $billing_info = "Card Number: $card_number, Expiration Date: $expiration_date, Security Code: $security_code";
 
+    // Update order with billing info
     $update_query = "UPDATE orders SET billing_info = '$billing_info' WHERE id = $order_id";
     if (mysqli_query($conn, $update_query)) {
+        // Fetch order items
+        $order_items_query = mysqli_query($conn, "SELECT * FROM order_items WHERE order_id = $order_id");
+
+        // Loop through order items to update stock quantities
+        while ($item = mysqli_fetch_assoc($order_items_query)) {
+            $product_id = $item['product_id'];
+            $quantity = $item['quantity'];
+
+            // Fetch current stock quantity
+            $current_product = mysqli_fetch_assoc(mysqli_query($conn, "SELECT stock_quantity FROM products WHERE id = $product_id"));
+
+            if ($current_product && $current_product['stock_quantity'] >= $quantity) {
+                // Calculate new stock quantity
+                $new_stock = $current_product['stock_quantity'] - $quantity;
+
+                // Update stock quantity in database
+                mysqli_query($conn, "UPDATE products SET stock_quantity = $new_stock WHERE id = $product_id");
+            } else {
+                // Handle insufficient stock (optional)
+                // In production, you might want to handle this case differently
+                die('Insufficient stock for product ID: ' . $product_id);
+            }
+        }
+
         // Clear the cart session after successfully updating the order
         unset($_SESSION['cart']);
         header('Location: success.php');
@@ -29,9 +53,9 @@ if (isset($_GET['order_id'])) {
     $order = mysqli_fetch_assoc($order_query);
 
     $order_items_query = mysqli_query($conn, "SELECT products.name, order_items.quantity, products.price FROM order_items INNER JOIN products ON order_items.product_id = products.id WHERE order_items.order_id = $order_id");
-}
 
-$total_price = 0;
+    $total_price = 0;
+}
 ?>
 
 <!DOCTYPE html>
